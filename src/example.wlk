@@ -7,7 +7,7 @@ object juego{
 		game.title("Battle City")
 		game.width(20)
 		game.height(20)
-		game.boardGround("mapavacio.png")
+		game.ground("ground.png")
 		game.addVisualCharacter(tank)
 		game.addVisual(enemigo)
 		game.addVisual(pared)
@@ -21,14 +21,14 @@ object juego{
 	}
 }
 object pared{
-	method image() = "cubo.png"
+	method image() = "cubo-64x64.png"
 	method position() = game.center().left(5).up(-5)
 	//hay que cambiar tamaños, agregar mas y agregar colision 
 }
 
 object tank{
 	var property position = game.origin()
-	method image() = "Tank.png"
+	method image() = "character-64x64.png"
 	
 	method subir() {
 		position = position.up(1)
@@ -49,5 +49,5 @@ object tank{
 
 object enemigo{
 	var property position = game.center()
-	method image() = "enemy.png"
+	method image() = "enemy-64x64.png"
 }
