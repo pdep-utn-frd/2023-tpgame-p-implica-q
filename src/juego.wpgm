@@ -1,0 +1,11 @@
+import example.*
+import wollok.game.*
+
+program BattleCity{
+	juego.iniciar()
+	
+	
+	
+	// START
+	game.start()
+}
