@@ -1,8 +1,11 @@
-import example.*
+//import Launcher.*
 import wollok.game.*
+import Main.*
+import Launcher.*
 
 program BattleCity{
 	juego.iniciar()
+
 	
 	
 	
