@@ -66,8 +66,9 @@ object tanque{
 	}
 	
 	method mover(unaOrientacion){
-
 		
+		image = unaOrientacion.imagenDelJugador()// cambio de perspectiva del tanque
+	
 		if (not(movimiento.puedeMoverAl(unaOrientacion))){
 			self.position(unaOrientacion.opuesto().posicionEnEsaDireccion())
 		}
@@ -92,21 +93,25 @@ object movimiento{
 
 //estos pueden ser tranquilamente un clase la cual la puede heredar movimientos
 object arriba{
+	method imagenDelJugador() = "TankUp.png"
 	method posicionEnEsaDireccion() = tanque.position().up(1)
 	method opuesto() = abajo
 }
 
 object abajo{
+	method imagenDelJugador() = "TankDown.png"
 	method posicionEnEsaDireccion() = tanque.position().down(1)
 	method opuesto() = arriba
 }
 
 object izquierda{
+	method imagenDelJugador() = "TankIzq.png"
 	method posicionEnEsaDireccion() = tanque.position().left(1)
 	method opuesto() = derecha	
 }
 
 object derecha{
+	method imagenDelJugador() = "TankRig.png"
 	method posicionEnEsaDireccion() = tanque.position().right(1)
 	method opuesto() = izquierda
 }
