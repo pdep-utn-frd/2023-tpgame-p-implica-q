@@ -46,12 +46,21 @@ object muros{
 	}
 }
 
+
+class Tank{
+	
+}
+
+
+
+
+
+
+
 object tanque{	
 	var property position = game.at(1,3)
-	var property image = "tank-64x64.png"
-	var property tieneRosquilla = false
-	
-	
+	var property image = "tank-64x64.png" //tanque debe ser 32x32 
+		
 	method position(nuevaPosicion){
 		position = nuevaPosicion
 	}
@@ -80,6 +89,8 @@ object movimiento{
    }
 }
 
+
+//estos pueden ser tranquilamente un clase la cual la puede heredar movimientos
 object arriba{
 	method posicionEnEsaDireccion() = tanque.position().up(1)
 	method opuesto() = abajo
@@ -99,4 +110,7 @@ object derecha{
 	method posicionEnEsaDireccion() = tanque.position().right(1)
 	method opuesto() = izquierda
 }
+
+
+
 
