@@ -46,33 +46,59 @@ object muros{
 	}
 }
 
-
-class Tank{
+class Bala{
+	var property position
+	var image = 'cubo-32x32.png'
+	
+	method desplazamiento(ultimaPos){
+		if (ultimaPos == 'arriba'){
+			position = position.up(1)
+            game.onTick(500,"moverseBala",{position = position.up(1)})
+        }
+        else if (ultimaPos == 'izquierda'){
+        	position = position.left(1)
+            game.onTick(500,"moverseBala",{position = position.left(1)})
+        }
+        else if (ultimaPos == 'abajo'){
+        	position = position.down(1)
+            game.onTick(500,"moverseBala",{position = position.down(1)})
+        }
+        else{
+        	position = position.right(1)
+            game.onTick(500,"moverseBala",{position = position.right(1)})
+        }	
+	}
 	
 }
-
-
-
-
-
-
 
 object tanque{	
 	var property position = game.at(1,3)
 	var property image = "tank-64x64.png"  
+	var property direccion = "arriba"
 		
 	method position(nuevaPosicion){
 		position = nuevaPosicion
 	}
 	
+	
 	method mover(unaOrientacion){
 		
 		image = unaOrientacion.imagenDelJugador()// cambio de perspectiva del tanque
-	
+		direccion = unaOrientacion.direc()
 		if (not(movimiento.puedeMoverAl(unaOrientacion))){
 			self.position(unaOrientacion.opuesto().posicionEnEsaDireccion())
 		}
 	}
+	
+	method disparar(){
+		const bala = new Bala(position = self.position())
+		game.addVisual(bala)
+		bala.desplazamiento(self.direccion())
+	}
+	method controles() {
+		keyboard.space().onPressDo{ self.disparar()}
+	}
+	
 }
 
 
@@ -96,24 +122,28 @@ object arriba{
 	method imagenDelJugador() = "tank-64x64.png"
 	method posicionEnEsaDireccion() = tanque.position().up(1)
 	method opuesto() = abajo
+	method direc()="arriba"
 }
 
 object abajo{
 	method imagenDelJugador() = "Tank-Ab.png"
 	method posicionEnEsaDireccion() = tanque.position().down(1)
 	method opuesto() = arriba
+	method direc()="abajo"
 }
 
 object izquierda{
 	method imagenDelJugador() = "Tank-Izq.png"
 	method posicionEnEsaDireccion() = tanque.position().left(1)
 	method opuesto() = derecha	
+	method direc()="izquierda"
 }
 
 object derecha{
 	method imagenDelJugador() = "TankDer.png"
 	method posicionEnEsaDireccion() = tanque.position().right(1)
 	method opuesto() = izquierda
+	method direc()="derecha"
 }
 
 
