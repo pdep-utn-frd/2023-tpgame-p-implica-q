@@ -46,30 +46,92 @@ object muros{
 	}
 }
 
-class Bala{
-	var property position
-	var image = 'cubo-32x32.png'
+//class Bala{
+//	var property position
+//	var image = 'cubo-32x32.png'
+//	
+//	method desplazamiento(ultimaPos){
+//		if (ultimaPos == 'arriba'){
+//			position = position.up(1)
+//            game.onTick(500,"moverseBala",{position = position.up(1)})
+//        }
+//        else if (ultimaPos == 'izquierda'){
+//        	position = position.left(1)
+//            game.onTick(500,"moverseBala",{position = position.left(1)})
+//        }
+//        else if (ultimaPos == 'abajo'){
+//        	position = position.down(1)
+//            game.onTick(500,"moverseBala",{position = position.down(1)})
+//        }
+//        else{
+//        	position = position.right(1)
+//            game.onTick(500,"moverseBala",{position = position.right(1)})
+//        }	
+//	}
+//	
+//}
+
+
+class Bala {
+	var position
+	method image() = "bala.png"
 	
-	method desplazamiento(ultimaPos){
-		if (ultimaPos == 'arriba'){
+	method position() = position
+	
+	method desplazarse(direccion){
+		if (direccion  == "arriba"){
 			position = position.up(1)
-            game.onTick(500,"moverseBala",{position = position.up(1)})
-        }
-        else if (ultimaPos == 'izquierda'){
-        	position = position.left(1)
-            game.onTick(500,"moverseBala",{position = position.left(1)})
-        }
-        else if (ultimaPos == 'abajo'){
-        	position = position.down(1)
-            game.onTick(500,"moverseBala",{position = position.down(1)})
-        }
-        else{
-        	position = position.right(1)
-            game.onTick(500,"moverseBala",{position = position.right(1)})
-        }	
+			game.onTick(250,"bola",{self.moverseArriba()})
+		}
+		else if (direccion == "abajo"){
+			position = position.down(1)
+			game.onTick(250,"bola",{self.moverseAbajo()})
+		}
+		else if (direccion =="izquierda"){
+			position = position.left(1)
+			game.onTick(250,"bola",{self.moverseIzq()})
+		}
+		else{
+			position = position.right(1)
+			game.onTick(250,"bola",{self.moverseDerecha()})
+		}
+			
 	}
+	method moverseDerecha() {
+		position = position.right(1)
+		if(position.x() > game.width()){
+			game.removeTickEvent("bala")
+			game.removeVisual(self)
+		}
+	
+	}
+	method moverseIzq() {
+		position = position.left(1)
+		if(position.x() < game.width()){
+			game.removeTickEvent("bala")
+			game.removeVisual(self)
+		}
+		
+	}
+	method moverseArriba() {
+		position = position.up(1)
+		if(position.y() > game.height()){
+			game.removeTickEvent("bala")
+			game.removeVisual(self)
+		}
+	
+	}
+	method moverseAbajo() {
+		position = position.down(1)
+		if(position.x() < game.height()){
+			game.removeTickEvent("bala")
+			game.removeVisual(self)
+		}
+		
+	}	
 	
 }
+
 
 object tanque{	
 	var property position = game.at(1,3)
@@ -89,14 +151,20 @@ object tanque{
 			self.position(unaOrientacion.opuesto().posicionEnEsaDireccion())
 		}
 	}
-	
-	method disparar(){
+	method dispara(){
 		const bala = new Bala(position = self.position())
 		game.addVisual(bala)
-		bala.desplazamiento(self.direccion())
+		bala.desplazarse(self.direccion())
+		
 	}
+	
+//	method disparar(){
+//		const bala = new Bala(position = self.position())
+//		game.addVisual(bala)
+//		bala.desplazamiento(self.direccion())
+//	}
 	method controles() {
-		keyboard.space().onPressDo{ self.disparar()}
+		keyboard.space().onPressDo{ self.dispara()}
 	}
 	
 }
