@@ -12,8 +12,8 @@ object juego{
 		movimiento.configurarFlechas()
 		game.addVisualCharacter(tanque)
 		game.whenCollideDo(tanque, {elemento => elemento.colisionar()})
-		game.say(tanque,tanque.position().toString())
 		tanque.controles()
+
 
 	}
 }

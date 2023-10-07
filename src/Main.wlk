@@ -4,6 +4,16 @@ class Muro{
 	var property position	
 	var property image = "cubo-64x64.png"
 	var property esAtravesable = false
+	
+	method desaparecer() {
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+		}
+	}
+
+	method impacto(){
+		self.desaparecer()
+	}
 }
 
 object muros{
@@ -42,8 +52,10 @@ object muros{
 		game.addVisual(dibujo)
 	}
 	
-	method colisionar(){
-	}
+	
+
+
+
 }
 
 //class Bala{
@@ -73,7 +85,7 @@ object muros{
 
 
 class Bala {
-	var position
+	var property position
 	method image() = "bala.png"
 	
 	method position() = position
@@ -81,19 +93,19 @@ class Bala {
 	method desplazarse(direccion){
 		if (direccion  == "arriba"){
 			position = position.up(1)
-			game.onTick(250,"bola",{self.moverseArriba()})
+			game.onTick(250,"bala",{self.moverseArriba()})
 		}
 		else if (direccion == "abajo"){
 			position = position.down(1)
-			game.onTick(250,"bola",{self.moverseAbajo()})
+			game.onTick(250,"bala",{self.moverseAbajo()})
 		}
 		else if (direccion =="izquierda"){
 			position = position.left(1)
-			game.onTick(250,"bola",{self.moverseIzq()})
+			game.onTick(250,"bala",{self.moverseIzq()})
 		}
 		else{
 			position = position.right(1)
-			game.onTick(250,"bola",{self.moverseDerecha()})
+			game.onTick(250,"bala",{self.moverseDerecha()})
 		}
 			
 	}
@@ -107,7 +119,7 @@ class Bala {
 	}
 	method moverseIzq() {
 		position = position.left(1)
-		if(position.x() < game.width()){
+		if(position.x() > game.width()){
 			game.removeTickEvent("bala")
 			game.removeVisual(self)
 		}
@@ -123,17 +135,26 @@ class Bala {
 	}
 	method moverseAbajo() {
 		position = position.down(1)
-		if(position.x() < game.height()){
+		if(position.x() > game.height()){
 			game.removeTickEvent("bala")
 			game.removeVisual(self)
 		}
 		
 	}	
 	
+	method impacto(){
+		if(game.hasVisual(self)){
+			game.removeTickEvent("bala")
+			game.removeVisual(self)
+		}
+	
+	}
 }
 
 
+
 object tanque{	
+	var property esAtravesable = false
 	var property position = game.at(1,3)
 	var property image = "tank-64x64.png"  
 	var property direccion = "arriba"
@@ -155,6 +176,8 @@ object tanque{
 		const bala = new Bala(position = self.position())
 		game.addVisual(bala)
 		bala.desplazarse(self.direccion())
+		game.whenCollideDo(bala,{algo=>algo.impacto()})
+		
 		
 	}
 	
@@ -168,6 +191,8 @@ object tanque{
 	}
 	
 }
+
+
 
 
 object movimiento{
