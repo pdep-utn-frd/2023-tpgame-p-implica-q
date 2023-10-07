@@ -2,7 +2,7 @@ import wollok.game.*
 
 class Muro{
 	var property position	
-	var property image = "cubo-32x32.png"	//muros deben ser 50x50
+	var property image = "cubo-64x64.png"
 	var property esAtravesable = false
 }
 
@@ -13,10 +13,10 @@ object muros{
 		const largo = game.height() - 1
 	
 		const posParedes = []
-		(0 .. ancho).forEach{ n => posParedes.add(new Position(x=n, y=0)) } // bordeAbajo
-		(0 .. ancho).forEach{ n => posParedes.add(new Position(x=n, y=largo)) } // bordeArriba 
-		(0 .. largo).forEach{ n => posParedes.add(new Position(x=0, y=n)) } // bordeIzq 
-		(0 .. largo).forEach{ n => posParedes.add(new Position(x=ancho, y=n)) } // bordeDer
+		(0 .. ancho).forEach{ n => posParedes.add(new Position(x=n, y=-1)) } // bordeAbajo
+		(0 .. ancho).forEach{ n => posParedes.add(new Position(x=n, y=largo+1)) } // bordeArriba 
+		(0 .. largo).forEach{ n => posParedes.add(new Position(x=-1, y=n)) } // bordeIzq 
+		(0 .. largo).forEach{ n => posParedes.add(new Position(x=ancho+1, y=n)) } // bordeDer
 		
 		[4,13,19].forEach{n => posParedes.add(new Position(x=n, y=16))}
 		[2,3,4,6,7,8,10,11,13,14,15,16,17,19,20,21].forEach{n => posParedes.add(new Position(x=n, y=15))}
@@ -59,7 +59,7 @@ class Tank{
 
 object tanque{	
 	var property position = game.at(1,3)
-	var property image = "tank-64x64.png" //tanque debe ser 32x32 
+	var property image = "tank-64x64.png"  
 		
 	method position(nuevaPosicion){
 		position = nuevaPosicion
@@ -93,25 +93,25 @@ object movimiento{
 
 //estos pueden ser tranquilamente un clase la cual la puede heredar movimientos
 object arriba{
-	method imagenDelJugador() = "TankUp.png"
+	method imagenDelJugador() = "tank-64x64.png"
 	method posicionEnEsaDireccion() = tanque.position().up(1)
 	method opuesto() = abajo
 }
 
 object abajo{
-	method imagenDelJugador() = "TankDown.png"
+	method imagenDelJugador() = "Tank-Ab.png"
 	method posicionEnEsaDireccion() = tanque.position().down(1)
 	method opuesto() = arriba
 }
 
 object izquierda{
-	method imagenDelJugador() = "TankIzq.png"
+	method imagenDelJugador() = "Tank-Izq.png"
 	method posicionEnEsaDireccion() = tanque.position().left(1)
 	method opuesto() = derecha	
 }
 
 object derecha{
-	method imagenDelJugador() = "TankRig.png"
+	method imagenDelJugador() = "TankDer.png"
 	method posicionEnEsaDireccion() = tanque.position().right(1)
 	method opuesto() = izquierda
 }

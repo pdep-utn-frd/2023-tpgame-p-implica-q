@@ -6,6 +6,7 @@ object juego{
 		game.title("Battle City")
 		game.width(25)
 		game.height(18)
+		game.cellSize(64)
 		game.ground("mapavacio.png")		
 		muros.cargarMuros()
 		movimiento.configurarFlechas()
