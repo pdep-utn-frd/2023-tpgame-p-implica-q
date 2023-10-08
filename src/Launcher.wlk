@@ -11,11 +11,8 @@ object juego{
 		muros.cargarMuros()
 		movimiento.configurarFlechas()
 		game.addVisualCharacter(tanque)
-		game.whenCollideDo(tanque, {elemento => elemento.colisionar()})
 		tanque.controles()
-
-
-	}
+		}
 }
 
 
