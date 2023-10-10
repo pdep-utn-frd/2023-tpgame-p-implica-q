@@ -1,10 +1,10 @@
-//import Launcher.*
 import wollok.game.*
-import Main.*
-import Launcher.*
+import visuales.*
+import BattleCity.*
+
 
 program BattleCity{
-	juego.iniciar()
+	launch.iniciar()
 	
 	
 	
