@@ -1,7 +1,8 @@
 import wollok.game.*
 import visuales.*
 import BattleCity.*
-
+import direcciones.*
+import personajes.*
 
 program BattleCity{
 	launch.iniciar()
