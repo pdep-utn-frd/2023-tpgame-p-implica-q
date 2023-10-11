@@ -1,12 +1,13 @@
-//import Launcher.*
 import wollok.game.*
-import Main.*
-import Launcher.*
+import visuales.*
+import BattleCity.*
+import direcciones.*
+import personajes.*
 
 program BattleCity{
-	juego.iniciar()
-
+	pantalla.iniciar()
 	
+
 	
 	
 	// START
