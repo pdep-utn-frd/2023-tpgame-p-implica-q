@@ -1,9 +1,12 @@
 import wollok.game.*
 import direcciones.*
 import visuales.*
+import BattleCity.*
 
 class Individuo inherits Imagen {
 	var property orientacion = derecha
+	
+	var property vida
 	
 	override method esAtravesable() = false	
 
@@ -15,6 +18,23 @@ class Individuo inherits Imagen {
 		if (direccion.puedeIr(individuo)) {
 			self.moverHacia(individuo, direccion)
 		}
+	}
+	
+	method desaparecer() {
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+		}
+	}
+
+	method bajarVida(){
+		vida -= 1
+		if (self.vida() == 0){
+			self.desaparecer()
+		}
+	}
+	
+	method impactoConBala(){
+		self.bajarVida()
 	}
 
 	method puedeMoverse(posicion) = posicion.allElements().all({ objeto => objeto.esAtravesable() })
@@ -42,9 +62,14 @@ class Individuo inherits Imagen {
 
 }
 
-object personaje inherits Individuo (position = game.at(1, 1), imagen = "tank-64x64.png"){
+object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen = "tank-64x64.png"){
 	
-	
+	override method bajarVida(){
+		vida -= 1
+		if (self.vida() == 0){
+			launch.gameOver()
+		}
+	}
 
 	override method image(){
 		return 'tank' + orientacion.nombre() + '.png'
@@ -70,16 +95,17 @@ class Enemigo inherits Individuo {
 
 	override method image(){
 		var colores = ["gris","rojo","verde"]//agregar fotos de colores 
-		return 'Enemigo' + orientacion.nombre()  + '.jpg' 
+		return 'Enemigo' + orientacion.nombre()  + '.png' 
 	}
 	//+ colores.AnyOne()
 	method tiraCagon(){
 		game.onTick(1100, "disparar",{self.disparar()})
 	}
+	
 }
 
 
-const enemigo0 = new Enemigo(position = game.at(5, 6), orientacion = arriba, imagen = "EnemigoArriba.jpg", categoria = 'enemigo')
+const enemigo0 = new Enemigo(vida = 1, position = game.at(5, 6), orientacion = arriba, imagen = "EnemigoArriba.jpg", categoria = 'enemigo')
 
 
 
