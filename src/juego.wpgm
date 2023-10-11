@@ -5,7 +5,7 @@ import direcciones.*
 import personajes.*
 
 program BattleCity{
-	launch.iniciar()
+	pantalla.iniciar()
 	
 
 	

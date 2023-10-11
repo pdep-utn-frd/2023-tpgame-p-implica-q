@@ -5,10 +5,7 @@ import personajes.*
 
 object launch{
 	method iniciar(){
-		game.title("Battle City")
-		game.width(26)
-		game.height(26)
-		game.cellSize(64)
+		game.clear()
 		game.ground("mapavacio.png")		
 		paredes.generarParedesLevel1()
 		paredes.generarParedHierroLevel1()
@@ -18,6 +15,33 @@ object launch{
 		enemigo0.tiraCagon()
 		configuraciones.configurarTeclas()
 		}
+}
+
+
+object pantalla {
+	method iniciar(){
+		game.title("Battle City")
+		game.width(26)
+		game.height(26)
+		game.cellSize(64)
+		game.ground("mapavacio.png")
+		game.addVisual(inicio)
+		inicio.teclas()	
+	}
+}
+
+object inicio {
+	
+var property position = game.at(0, 0)
+
+	method image() = "Inicio.jpg"
+
+	
+	method teclas() {
+		keyboard.enter().onPressDo{launch.iniciar()}
+		keyboard.q().onPressDo{game.stop()}
+	}
+
 }
 
 
