@@ -25,6 +25,7 @@ class Individuo inherits Imagen {
 			individuo.orientacion(direccion)
 			individuo.position(nuevaPosicion)
 		}
+
 	}
 	
 	method disparar(){
@@ -77,4 +78,11 @@ class Enemigo inherits Individuo {
 	}
 }
 
+
 const enemigo0 = new Enemigo(position = game.at(5, 6), orientacion = arriba, imagen = "EnemigoArriba.jpg", categoria = 'enemigo')
+
+
+
+
+
+

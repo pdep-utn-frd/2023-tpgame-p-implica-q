@@ -6,11 +6,12 @@ import personajes.*
 object launch{
 	method iniciar(){
 		game.title("Battle City")
-		game.width(30)
-		game.height(30)
+		game.width(26)
+		game.height(26)
 		game.cellSize(64)
 		game.ground("mapavacio.png")		
-		paredes.generarParedes()
+		paredes.generarParedesLevel1()
+		paredes.generarParedHierroLevel1()
 		game.addVisual(personaje)
 		game.addVisual(enemigo0)
 		enemigo0.moverse()
