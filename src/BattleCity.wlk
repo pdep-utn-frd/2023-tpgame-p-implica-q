@@ -19,6 +19,7 @@ object launch{
 		game.clear()
 		game.boardGround("GameOver.png")
 		juego.alPresionarQ()
+		juego.alPresionarEnter() // revive el tanque pero con vida negativa, no se puede volver a morir
 	}
 }
 
