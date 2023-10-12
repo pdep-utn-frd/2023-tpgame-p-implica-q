@@ -18,6 +18,7 @@ object launch{
 	method gameOver(){
 		game.clear()
 		game.boardGround("GameOver.png")
+		juego.alPresionarQ()
 	}
 }
 
