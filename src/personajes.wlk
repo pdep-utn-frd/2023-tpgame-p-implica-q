@@ -23,6 +23,7 @@ class Individuo inherits Imagen {
 	method desaparecer() {
 		if(game.hasVisual(self)){
 			game.removeVisual(self)
+			game.removeTickEvent("disparar")
 		}
 	}
 
@@ -44,6 +45,9 @@ class Individuo inherits Imagen {
 		if (self.puedeMoverse(nuevaPosicion)) {
 			individuo.orientacion(direccion)
 			individuo.position(nuevaPosicion)
+		}
+		else{
+			individuo.orientacion(direccion)
 		}
 
 	}
@@ -99,7 +103,7 @@ class Enemigo inherits Individuo {
 	}
 	//+ colores.AnyOne()
 	method tiraCagon(){
-		game.onTick(1100, "disparar",{self.disparar()})
+		game.onTick(1800, "disparar",{self.disparar()})
 	}
 	
 }
