@@ -74,6 +74,10 @@ object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen 
 			launch.gameOver()
 		}
 	}
+	
+	method reiniciar(){
+		vida = 5
+	}
 
 	override method image(){
 		return 'tank' + orientacion.nombre() + '.png'

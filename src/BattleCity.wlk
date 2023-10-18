@@ -42,6 +42,7 @@ object inicio {
 var property position = game.at(0, 0)
 	method image() = "Inicio.png"
 	method enter() {
+		personaje.reiniciar()
 		keyboard.enter().onPressDo{launch.iniciar()}
 	}	
 	method q() {
