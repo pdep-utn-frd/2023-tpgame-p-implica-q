@@ -10,9 +10,15 @@ object launch{
 		paredes.generarParedesLevel1()
 		paredes.generarParedHierroLevel1()
 		game.addVisual(personaje)
+		personaje.reiniciar()
+		enemigo0.reiniciar()
+		granenemigo0.reiniciar()
 		game.addVisual(enemigo0)
+		game.addVisual(granenemigo0)
 		enemigo0.moverse()
 		enemigo0.tiraCagon()
+		granenemigo0.moverse()
+		granenemigo0.tiraCagon()
 		configuraciones.configurarTeclas()
 		}
 	method gameOver(){
@@ -27,9 +33,9 @@ object launch{
 object pantalla {
 	method iniciar(){
 		game.title("Battle City")
-		game.width(12)
-		game.height(12)
-		game.cellSize(64)
+		game.width(24)
+		game.height(24)
+		game.cellSize(32)
 		game.ground("mapavacio.png")
 		game.addVisual(inicio)
 		juego.alPresionarEnter()
@@ -42,7 +48,6 @@ object inicio {
 var property position = game.at(0, 0)
 	method image() = "Inicio.png"
 	method enter() {
-		personaje.reiniciar()
 		keyboard.enter().onPressDo{launch.iniciar()}
 	}	
 	method q() {

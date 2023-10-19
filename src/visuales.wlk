@@ -98,19 +98,19 @@ class Bala inherits Imagen{
 	method desplazarse(direccion){
 		if (direccion  == "Arriba"){
 			position = position.up(1)
-			game.onTick(100,"bala",{self.moverseArriba()})
+			game.onTick(50,"bala",{self.moverseArriba()})
 		}
 		else if (direccion == "Abajo"){
 			position = position.down(1)
-			game.onTick(100,"bala",{self.moverseAbajo()})
+			game.onTick(50,"bala",{self.moverseAbajo()})
 		}
 		else if (direccion =="Izquierda"){
 			position = position.left(1)
-			game.onTick(100,"bala",{self.moverseIzq()})
+			game.onTick(50,"bala",{self.moverseIzq()})
 		}
 		else{
 			position = position.right(1)
-			game.onTick(100,"bala",{self.moverseDerecha()})
+			game.onTick(50,"bala",{self.moverseDerecha()})
 		}
 			
 	}
@@ -155,7 +155,11 @@ class Bala inherits Imagen{
 	
 	}
 	method ImpactoConBala(){
-		
+
 	}
+	
+}
+
+object contadorVidas{
 	
 }

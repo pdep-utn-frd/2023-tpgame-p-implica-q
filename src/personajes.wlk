@@ -20,6 +20,10 @@ class Individuo inherits Imagen {
 		}
 	}
 	
+	method reiniciar(){
+		vida = 5
+	}
+	
 	method desaparecer() {
 		if(game.hasVisual(self)){
 			game.removeVisual(self)
@@ -74,10 +78,6 @@ object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen 
 			launch.gameOver()
 		}
 	}
-	
-	method reiniciar(){
-		vida = 5
-	}
 
 	override method image(){
 		return 'tank' + orientacion.nombre() + '.png'
@@ -101,8 +101,11 @@ class Enemigo inherits Individuo {
 
 	method direccionesAtravesables() = [ izquierda, arriba, abajo, derecha ].filter{ direccion => direccion.puedeIr(self) }
 
+	override method reiniciar(){
+		vida = 1
+	}
+
 	override method image(){
-		var colores = ["gris","rojo","verde"]//agregar fotos de colores 
 		return 'Enemigo' + orientacion.nombre()  + '.png' 
 	}
 	//+ colores.AnyOne()
@@ -112,10 +115,23 @@ class Enemigo inherits Individuo {
 	
 }
 
+class GranEnemigo inherits Enemigo{
+	override method reiniciar(){
+		vida = 4
+	}	
+	
+	override method moverse(){
+		game.onTick(500, "perseguir" + self, { self.moverHaciaJugador()})
+	}
+	
+	override method image(){
+		return 'GranEnemigo' + orientacion.nombre()  + '.png'
+	}
+} 
 
-const enemigo0 = new Enemigo(vida = 1, position = game.at(5, 6), orientacion = arriba, imagen = "EnemigoArriba.jpg", categoria = 'enemigo')
+const enemigo0 = new Enemigo(vida = 1, position = game.at(5, 6), orientacion = arriba, imagen = "EnemigoArriba.png", categoria = 'enemigo')
 
-
+const granenemigo0 = new GranEnemigo(vida = 4, position = game.at(5, 10), orientacion = abajo, imagen = "GranEnemigoAbajo.png", categoria = 'granenemigo'  )
 
 
 
