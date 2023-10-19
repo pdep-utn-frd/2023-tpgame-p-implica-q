@@ -4,6 +4,17 @@ import direcciones.*
 import personajes.*
 
 object launch{
+	
+	var property position
+	var property enemigosSimples = 1
+	var property enemigosDificiles = 1
+	
+	
+//	const enemigo0 = new Enemigo(vida = 1,position = self.randomPos(), orientacion = arriba, imagen = "EnemigoArriba.png", categoria = 'enemigo')
+//
+//	const granenemigo0 = new GranEnemigo(vida = 4, position = self.randomPos() , orientacion = abajo, imagen = "GranEnemigoAbajo.png", categoria = 'granenemigo'  )
+//	
+	
 	method iniciar(){
 		game.clear()
 		game.ground("mapavacio.png")		
@@ -11,30 +22,60 @@ object launch{
 		paredes.generarParedHierroLevel1()
 		game.addVisual(personaje)
 		personaje.reiniciar()
-		enemigo0.reiniciar()
-		granenemigo0.reiniciar()
-		game.addVisual(enemigo0)
-		game.addVisual(granenemigo0)
-		enemigo0.moverse()
-		enemigo0.tiraCagon()
-		granenemigo0.moverse()
-		granenemigo0.tiraCagon()
+//		enemigo0.reiniciar()
+//		granenemigo0.reiniciar()
+//		game.addVisual(enemigo0)
+//		game.addVisual(granenemigo0)
+		game.onTick(5000, 'generarEnemigo', { self.spawnear()
+		})
+		self.spawnear()
+//		enemigo0.moverse()
+//		enemigo0.tiraCagon()
+//		granenemigo0.moverse()
+//		granenemigo0.tiraCagon()
 		configuraciones.configurarTeclas()
 		}
+		
 	method gameOver(){
 		game.clear()
 		game.boardGround("GameOver.png")
 		juego.alPresionarQ()
 		juego.alPresionarEnter() // revive el tanque pero con vida negativa, no se puede volver a morir
 	}
+	
+	method randomPos(){
+		const x = (0 .. game.width() - 2).anyOne()
+		const y = game.height() - 1
+		position = game.at(x, y)
+		
+		return position
+	}
+	
+	method spawnear(){
+		if (enemigosSimples <= 1 and enemigosDificiles <=1){
+			new Enemigo(vida =1 ,imagen="EnemigoAbajo.png").config() 
+			new GranEnemigo(vida =1 ,imagen="GranEnemigoAbajo.png").config() 
+			enemigosSimples += 1
+			enemigosDificiles +=1
+		}
+	}
+	
+	method MuereEnemigosSimples(){
+		enemigosSimples -= 1
+	}
+	
+	method MuereEnemigosDificles(){
+		enemigosDificiles -= 1
+	}
+	
 }
 
 
 object pantalla {
 	method iniciar(){
 		game.title("Battle City")
-		game.width(24)
-		game.height(24)
+		game.width(26)
+		game.height(26)
 		game.cellSize(32)
 		game.ground("mapavacio.png")
 		game.addVisual(inicio)

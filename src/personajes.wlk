@@ -87,7 +87,14 @@ object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen 
 
 class Enemigo inherits Individuo {
 
-
+	override method desaparecer() {
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+			game.removeTickEvent("disparar")
+			launch.MuereEnemigosSimples()
+			}
+		}
+	
 	method moverse() {
 		game.onTick(250, "perseguir" + self, { self.moverHaciaJugador()})
 	}
@@ -112,7 +119,19 @@ class Enemigo inherits Individuo {
 	method tiraCagon(){
 		game.onTick(1800, "disparar",{self.disparar()})
 	}
-	
+	method config(){
+//		vida = 1
+		position = launch.randomPos()
+		orientacion = abajo
+//		imagen = "EnemigoAbajo.png"
+		categoria = "enemigo"
+		
+		game.addVisual(self)	
+		self.moverse()
+		self.tiraCagon()	
+		self.reiniciar()
+	}
+		
 }
 
 class GranEnemigo inherits Enemigo{
@@ -127,11 +146,27 @@ class GranEnemigo inherits Enemigo{
 	override method image(){
 		return 'GranEnemigo' + orientacion.nombre()  + '.png'
 	}
+	override method config(){
+//		vida = 1
+		position = launch.randomPos()
+		orientacion = abajo
+//		imagen = "EnemigoAbajo.png"
+		categoria = "enemigo"
+		
+		game.addVisual(self)	
+		self.moverse()
+		self.tiraCagon()	
+		self.reiniciar()
+	}
+	override method desaparecer() {
+		if(game.hasVisual(self)){
+			game.removeVisual(self)
+			game.removeTickEvent("disparar")
+			launch.MuereEnemigosDificles()
+			}
+		}
 } 
 
-const enemigo0 = new Enemigo(vida = 1, position = game.at(5, 6), orientacion = arriba, imagen = "EnemigoArriba.png", categoria = 'enemigo')
-
-const granenemigo0 = new GranEnemigo(vida = 4, position = game.at(5, 10), orientacion = abajo, imagen = "GranEnemigoAbajo.png", categoria = 'granenemigo'  )
 
 
 
