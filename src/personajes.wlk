@@ -15,6 +15,7 @@ class Individuo inherits Imagen {
 	}
 
 	method moverHaciaSiSePuede (direccion) {
+		self.orientacion(direccion) // esta linea arreglo todo el sistema de movimiento
 		if (direccion.puedeIr(self)) {
 			self.moverHacia(self, direccion)
 		}
