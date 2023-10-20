@@ -257,6 +257,23 @@ object contadorVidas inherits Imagen(imagen = "5.png", position = game.at(24,25)
 	}
 }
 
+object testKills inherits Imagen(imagen = "1.png", position = game.at(23,25)){
+	method cambiarImagen(){
+		if (launch.kills() == 0){
+			imagen = "SteelBlock-64x64.png"
+		}
+		else if (launch.kills() == 1){
+			imagen = "1.png"
+		}
+		else if (launch.kills() == 2){
+			imagen = "2.png"
+		}
+		else if (launch.kills() == 3){
+			imagen = "3.png"
+		}
+	}
+}
+
 object corazon inherits Imagen(imagen = "corazon.png", position = game.at(25,25)){
 	method impactoConBala(bala){
 		

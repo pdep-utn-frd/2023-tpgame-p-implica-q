@@ -4,27 +4,29 @@ import direcciones.*
 import personajes.*
 
 object launch{
-	
 	var property position
 	var property enemigosSimples = 1
 	var property enemigosDificiles = 1
-	
+	var property kills = 0
 	
 //	const enemigo0 = new Enemigo(vida = 1,position = self.randomPos(), orientacion = arriba, imagen = "EnemigoArriba.png", categoria = 'enemigo')
 //
 //	const granenemigo0 = new GranEnemigo(vida = 4, position = self.randomPos() , orientacion = abajo, imagen = "GranEnemigoAbajo.png", categoria = 'granenemigo'  )
 //	
 	
-	method iniciar(){
+	method level1(){
 		game.clear()
+		if (kills == 2){
+			self.level2()
+		}		
 		game.ground("mapavacio.png")		
-		paredes.generarParedesLevel2()
-		paredes.generarParedHierroLevel2()
-		paredes.generarAguaLevel2()
+		paredes.generarParedesLevel1()
+		paredes.generarParedHierroLevel1()
 		game.addVisual(personaje)
 		personaje.reiniciar()
 		game.addVisual(corazon)
 		game.addVisual(contadorVidas)
+		game.addVisual(testKills)
 //		enemigo0.reiniciar()
 //		granenemigo0.reiniciar()
 //		game.addVisual(enemigo0)
@@ -38,6 +40,22 @@ object launch{
 //		granenemigo0.tiraCagon()
 		configuraciones.configurarTeclas()
 		}
+	
+	method level2(){
+		game.clear()
+		game.ground("mapavacio.png")
+		paredes.generarParedesLevel2()
+		paredes.generarParedHierroLevel2()
+		paredes.generarAguaLevel2()
+		game.addVisual(personaje)
+		personaje.reiniciar()
+		game.addVisual(corazon)
+		game.addVisual(contadorVidas)
+		game.onTick(5000, 'generarEnemigo', { self.spawnear()
+		})
+		self.spawnear()	
+		configuraciones.configurarTeclas()		
+	}
 		
 	method gameOver(){
 		game.clear()
@@ -46,6 +64,7 @@ object launch{
 		juego.alPresionarEnter()
 		enemigosSimples = 1
 		enemigosDificiles = 1
+		kills = 0
 	}
 	
 	method randomPos(){
@@ -72,7 +91,9 @@ object launch{
 	method MuereEnemigosDificles(){
 		enemigosDificiles -= 1
 	}
-	
+	method contarKills(){
+		kills = kills + 1
+	}
 }
 
 
@@ -94,7 +115,7 @@ object inicio {
 var property position = game.at(0, 0)
 	method image() = "Inicio.png"
 	method enter() {
-		keyboard.enter().onPressDo{launch.iniciar()}
+		keyboard.enter().onPressDo{launch.level1()}
 	}	
 	method q() {
 		keyboard.q().onPressDo{game.stop()}

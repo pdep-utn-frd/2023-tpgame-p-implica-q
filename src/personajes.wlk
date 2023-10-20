@@ -25,6 +25,7 @@ class Individuo inherits Imagen {
 		position = game.at(1,1)
 		vida = 5
 		contadorVidas.cambiarImagen()
+		testKills.cambiarImagen()
 	}
 	
 	method desaparecer() {
@@ -75,7 +76,6 @@ class Individuo inherits Imagen {
 }
 
 object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen = "tankDerecha.png"){
-	
 	override method bajarVida(){
 		vida -= 1
 		contadorVidas.cambiarImagen()
@@ -97,6 +97,7 @@ class Enemigo inherits Individuo {
 			game.removeVisual(self)
 			game.removeTickEvent("disparar")
 			launch.MuereEnemigosSimples()
+			launch.contarKills()
 			}
 		}
 	
@@ -168,6 +169,7 @@ class GranEnemigo inherits Enemigo{
 			game.removeVisual(self)
 			game.removeTickEvent("disparar")
 			launch.MuereEnemigosDificles()
+			launch.contarKills()
 			}
 		}
 } 
