@@ -21,6 +21,7 @@ class Individuo inherits Imagen {
 	}
 	
 	method reiniciar(){
+		position = game.at(1,1)
 		vida = 5
 		contadorVidas.cambiarImagen()
 	}
