@@ -14,17 +14,23 @@ class Pared{
 		}
 	}
 
-	method impactoConBala(){
+	method impactoConBala(bala){
 		self.desaparecer()
+		bala.impacto()
 	}
 
 }
 
 class Hierro inherits Pared{
-		override method impactoConBala(){
-			
-		}
-	
+	override method impactoConBala(bala){
+		bala.impacto()
+	}
+}
+
+class Agua inherits Pared{
+	override method impactoConBala(bala){
+		
+	}
 }
 
 //crear un bloque que no se puede romper, con otra textura
@@ -89,9 +95,73 @@ object paredes{
 		game.addVisual(dibujo)
 	}
 	
+	method generarParedesLevel2(){
+		
+		const posParedes = []
+		[2, 3, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=23))}
+		[2, 3, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=22))}
+		[2, 3, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=21))}
+		[2, 3, 12, 13, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=20))}
+		[6, 7].forEach{n => posParedes.add(new Position(x=n, y=19))}
+		[6, 7].forEach{n => posParedes.add(new Position(x=n, y=18))}
+		[6, 7, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=17))}
+		[6, 7, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=16))}
+		[10, 11].forEach{n => posParedes.add(new Position(x=n, y=15))}
+		[10, 11].forEach{n => posParedes.add(new Position(x=n, y=14))}
+		[2, 3, 4, 5, 6, 7, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=13))}
+		[2, 3, 4, 5, 6, 7, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=12))}
+		[10, 11, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=11))}
+		[10, 11, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=10))}
+		[2, 3, 10, 11, 14, 15, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=9))}
+		[2, 3, 10, 11, 14, 15, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=8))}
+		[2, 3, 6, 7, 10, 11, 12, 13, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=7))}
+		[2, 3, 6, 7, 10, 11, 12, 13, 14, 15, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=6))}
+		[2, 3, 6, 7, 10, 11, 12, 13, 14, 15].forEach{n => posParedes.add(new Position(x=n, y=5))}
+		[2, 3, 6, 7].forEach{n => posParedes.add(new Position(x=n, y=4))}
+		[2, 3, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=3))}
+		[2, 3, 11, 12, 13, 14, 18, 19, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=2))}
+		[2, 3, 6, 7, 11, 14, 18, 19, 20, 21, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=1))}
+		[2, 3, 6, 7, 11, 14, 18, 19, 20, 21, 22, 23].forEach{n => posParedes.add(new Position(x=n, y=0))}
+		
+		posParedes.forEach { p => self.dibujar(new Pared(position = p)) }
+	}
+	method generarParedHierroLevel2(){
+		const posParedes = []
+		[6, 7].forEach{n => posParedes.add(new Position(x=n, y=23))}
+		[6, 7].forEach{n => posParedes.add(new Position(x=n, y=22))}
+		[20, 21].forEach{n => posParedes.add(new Position(x=n, y=21))}
+		[20, 21].forEach{n => posParedes.add(new Position(x=n, y=20))}
+		[18, 19].forEach{n => posParedes.add(new Position(x=n, y=19))}
+		[18, 19].forEach{n => posParedes.add(new Position(x=n, y=18))}
+		[12, 13, 24, 25].forEach{n => posParedes.add(new Position(x=n, y=17))}
+		[12, 13, 24, 25].forEach{n => posParedes.add(new Position(x=n, y=16))}
+		[16, 17].forEach{n => posParedes.add(new Position(x=n, y=15))}
+		[16, 17].forEach{n => posParedes.add(new Position(x=n, y=14))}
+		[14, 15].forEach{n => posParedes.add(new Position(x=n, y=13))}
+		[14, 15].forEach{n => posParedes.add(new Position(x=n, y=12))}
+		[6, 7].forEach{n => posParedes.add(new Position(x=n, y=11))}
+		[6, 7].forEach{n => posParedes.add(new Position(x=n, y=10))}
+		[0, 1, 6, 7].forEach{n => posParedes.add(new Position(x=n, y=9))}
+		[0, 1, 6, 7].forEach{n => posParedes.add(new Position(x=n, y=8))}
+		posParedes.forEach { p => self.dibujar(new Hierro(position = p,image ="SteelBlock-64x64.png" )) }
+	}
+	method generarAguaLevel2(){
+		const posParedes = []
+		[0, 1, 20, 21].forEach{n => posParedes.add(new Position(x=n, y=17))}
+		[0, 1, 20, 21].forEach{n => posParedes.add(new Position(x=n, y=16))}
+		[0, 1, 2, 3, 20, 21].forEach{n => posParedes.add(new Position(x=n, y=15))}
+		[0, 1, 2, 3, 20, 21].forEach{n => posParedes.add(new Position(x=n, y=14))}
+		[8, 9, 10, 11, 12, 13, 20, 21].forEach{n => posParedes.add(new Position(x=n, y=13))}
+		[8, 9, 10, 11, 12, 13, 20, 21].forEach{n => posParedes.add(new Position(x=n, y=12))}
+		[8, 9].forEach{n => posParedes.add(new Position(x=n, y=11))}
+		[8, 9].forEach{n => posParedes.add(new Position(x=n, y=10))}
+		posParedes.forEach { p => self.dibujar(new Agua(position = p,image ="Agua.png" )) }
+	}
 }
 
 class Bala inherits Imagen{
+	
+	var property material= "bala"
 	
 	override method position() = position
 	
@@ -154,12 +224,41 @@ class Bala inherits Imagen{
 		}
 	
 	}
-	method ImpactoConBala(){
-
+	method impactoConBala(bala){
+		bala.impacto()
+		if(game.hasVisual(self)){
+			game.removeTickEvent("bala")
+			game.removeVisual(self)
+		}
 	}
 	
 }
 
-object contadorVidas{
-	
+object contadorVidas inherits Imagen(imagen = "5.png", position = game.at(24,25)){
+	method cambiarImagen(){
+		if (personaje.vida() == 5){
+			imagen = "5.png"
+		}
+		else if (personaje.vida() == 4){
+			imagen = "4.png"
+		}
+		else if (personaje.vida() == 3){
+			imagen = "3.png"
+		}
+		else if (personaje.vida() == 2){
+			imagen = "2.png"
+		}
+		else{
+			imagen = "1.png"
+		}
+	}
+	method impactoConBala(bala){
+		
+	}
+}
+
+object corazon inherits Imagen(imagen = "corazon.png", position = game.at(25,25)){
+	method impactoConBala(bala){
+		
+	}
 }

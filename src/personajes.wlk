@@ -11,17 +11,18 @@ class Individuo inherits Imagen {
 	override method esAtravesable() = false	
 
 	method moverse(direccion) {
-		self.moverHaciaSiSePuede(self, direccion)
+		self.moverHaciaSiSePuede(direccion)
 	}
 
-	method moverHaciaSiSePuede(individuo, direccion) {
-		if (direccion.puedeIr(individuo)) {
-			self.moverHacia(individuo, direccion)
+	method moverHaciaSiSePuede (direccion) {
+		if (direccion.puedeIr(self)) {
+			self.moverHacia(self, direccion)
 		}
 	}
 	
 	method reiniciar(){
 		vida = 5
+		contadorVidas.cambiarImagen()
 	}
 	
 	method desaparecer() {
@@ -38,7 +39,8 @@ class Individuo inherits Imagen {
 		}
 	}
 	
-	method impactoConBala(){
+	method impactoConBala(bala){
+		bala.impacto()
 		self.bajarVida()
 	}
 
@@ -46,13 +48,13 @@ class Individuo inherits Imagen {
 
 	method moverHacia(individuo, direccion) {
 		const nuevaPosicion = direccion.posicion(individuo.position())
+		individuo.orientacion(direccion)		
 		if (self.puedeMoverse(nuevaPosicion)) {
-			individuo.orientacion(direccion)
 			individuo.position(nuevaPosicion)
 		}
-		else{
-			individuo.orientacion(direccion)
-		}
+//		else{
+//			individuo.orientacion(direccion)
+//		}
 
 	}
 	
@@ -60,8 +62,8 @@ class Individuo inherits Imagen {
 		const bala = new Bala(position = self.position(), imagen ="bala.png")
 		game.addVisual(bala)
 		bala.desplazarse(orientacion.nombre())	
-		game.whenCollideDo(bala, {elemento => elemento.impactoConBala() 
-												bala.impacto()
+		game.whenCollideDo(bala, {elemento => elemento.impactoConBala(bala)
+//			bala.impacto()
 												//game.addVisual(explosion)
 												//borra la explosion despues pero hace que se vea un poco
 										})	
@@ -70,10 +72,11 @@ class Individuo inherits Imagen {
 
 }
 
-object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen = "tank-64x64.png"){
+object personaje inherits Individuo (vida = 5, position = game.at(1, 1), imagen = "tankDerecha.png"){
 	
 	override method bajarVida(){
 		vida -= 1
+		contadorVidas.cambiarImagen()
 		if (self.vida() == 0){
 			launch.gameOver()
 		}
@@ -103,7 +106,7 @@ class Enemigo inherits Individuo {
 
 	method moverHaciaJugador() {
 		var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
-		self.moverHaciaSiSePuede(self, direccionMasConveniente)
+		self.moverHaciaSiSePuede(direccionMasConveniente)
 	}
 
 	method direccionesAtravesables() = [ izquierda, arriba, abajo, derecha ].filter{ direccion => direccion.puedeIr(self) }

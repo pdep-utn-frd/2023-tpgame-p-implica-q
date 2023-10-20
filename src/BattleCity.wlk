@@ -18,10 +18,13 @@ object launch{
 	method iniciar(){
 		game.clear()
 		game.ground("mapavacio.png")		
-		paredes.generarParedesLevel1()
-		paredes.generarParedHierroLevel1()
+		paredes.generarParedesLevel2()
+		paredes.generarParedHierroLevel2()
+		paredes.generarAguaLevel2()
 		game.addVisual(personaje)
 		personaje.reiniciar()
+		game.addVisual(corazon)
+		game.addVisual(contadorVidas)
 //		enemigo0.reiniciar()
 //		granenemigo0.reiniciar()
 //		game.addVisual(enemigo0)
@@ -38,9 +41,11 @@ object launch{
 		
 	method gameOver(){
 		game.clear()
-		game.boardGround("GameOver.png")
+		game.addVisual(gameover)
 		juego.alPresionarQ()
-		juego.alPresionarEnter() // revive el tanque pero con vida negativa, no se puede volver a morir
+		juego.alPresionarEnter()
+		enemigosSimples = 1
+		enemigosDificiles = 1
 	}
 	
 	method randomPos(){
@@ -54,7 +59,7 @@ object launch{
 	method spawnear(){
 		if (enemigosSimples <= 1 and enemigosDificiles <=1){
 			new Enemigo(vida =1 ,imagen="EnemigoAbajo.png").config() 
-			new GranEnemigo(vida =1 ,imagen="GranEnemigoAbajo.png").config() 
+			new GranEnemigo(vida =4 ,imagen="GranEnemigoAbajo.png").config() 
 			enemigosSimples += 1
 			enemigosDificiles +=1
 		}
@@ -95,6 +100,11 @@ var property position = game.at(0, 0)
 		keyboard.q().onPressDo{game.stop()}
 	}
 
+}
+
+object gameover {
+var property position = game.at(0, 0)
+	method image() = "Gameover.png"
 }
 
 
