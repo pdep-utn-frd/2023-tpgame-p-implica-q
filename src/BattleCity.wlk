@@ -142,7 +142,7 @@ var property position = game.at(0, 0)
 }
 object win{
 	var property position = game.at(0, 0)
-	method image() = "logo.png"
+	method image() = "youwin.png"
 }
 object gameover {
 var property position = game.at(0, 0)
