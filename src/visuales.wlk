@@ -257,7 +257,7 @@ object contadorVidas inherits Imagen(imagen = "5.png", position = game.at(24,25)
 	}
 }
 
-object testKills inherits Imagen(imagen = "1.png", position = game.at(23,25)){
+object testKills inherits Imagen(imagen = "1.png", position = game.at(0,25)){
 	method cambiarImagen(){
 		if (launch.kills() == 0){
 			imagen = "SteelBlock-64x64.png"
