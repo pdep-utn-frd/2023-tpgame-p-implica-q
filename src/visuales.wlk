@@ -163,6 +163,11 @@ class Bala inherits Imagen{
 	
 	var property material= "bala"
 	
+	method borrarBala(){
+		game.removeTickEvent("bala")
+		game.removeVisual(self)
+	}
+	
 	override method position() = position
 	
 	method desplazarse(direccion){
@@ -187,48 +192,42 @@ class Bala inherits Imagen{
 	method moverseDerecha() {
 		position = position.right(1)
 		if(position.x() > game.width()){
-			game.removeTickEvent("bala")
-			game.removeVisual(self)
+			self.borrarBala()
 		}
 	
 	}
 	method moverseIzq() {
 		position = position.left(1)
 		if(position.x() > game.width()){
-			game.removeTickEvent("bala")
-			game.removeVisual(self)
+			self.borrarBala()
 		}
 		
 	}
 	method moverseArriba() {
 		position = position.up(1)
 		if(position.y() > game.height()){
-			game.removeTickEvent("bala")
-			game.removeVisual(self)
+			self.borrarBala()
 		}
 	
 	}
 	method moverseAbajo() {
 		position = position.down(1)
 		if(position.x() > game.height()){
-			game.removeTickEvent("bala")
-			game.removeVisual(self)
+			self.borrarBala()
 		}
 		
 	}	
 	
 	method impacto(){
 		if(game.hasVisual(self)){
-			game.removeTickEvent("bala")
-			game.removeVisual(self)
+			self.borrarBala()
 		}
 	
 	}
 	method impactoConBala(bala){
 		bala.impacto()
 		if(game.hasVisual(self)){
-			game.removeTickEvent("bala")
-			game.removeVisual(self)
+			self.borrarBala()
 		}
 	}
 	
