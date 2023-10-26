@@ -16,9 +16,6 @@ object launch{
 	
 	method level1(){
 		game.clear()
-		if (kills == 2){
-			self.level2()
-		}		
 		game.ground("mapavacio.png")		
 		paredes.generarParedesLevel1()
 		paredes.generarParedHierroLevel1()
@@ -31,7 +28,7 @@ object launch{
 //		granenemigo0.reiniciar()
 //		game.addVisual(enemigo0)
 //		game.addVisual(granenemigo0)
-		game.onTick(5000, 'generarEnemigo', { self.spawnear()
+		game.onTick(5000, 'generarEnemigo', { self.cambiaLvl() self.spawnear() 
 		})
 		self.spawnear()
 //		enemigo0.moverse()
@@ -39,10 +36,12 @@ object launch{
 //		granenemigo0.moverse()
 //		granenemigo0.tiraCagon()
 		configuraciones.configurarTeclas()
+		self.cambiaLvl()
 		}
 	
 	method level2(){
 		game.clear()
+		kills =0
 		game.ground("mapavacio.png")
 		paredes.generarParedesLevel2()
 		paredes.generarParedHierroLevel2()
@@ -51,12 +50,29 @@ object launch{
 		personaje.reiniciar()
 		game.addVisual(corazon)
 		game.addVisual(contadorVidas)
-		game.onTick(5000, 'generarEnemigo', { self.spawnear()
+		game.addVisual(testKills)
+		game.onTick(5000, 'generarEnemigo', { self.spawnear() self.win()
 		})
 		self.spawnear()	
 		configuraciones.configurarTeclas()		
 	}
-		
+	
+	method cambiaLvl(){
+		if (kills == 4 ){
+		self.level2()
+		}
+	}
+	method win(){
+		if (kills == 4){
+		game.clear()
+		game.addVisual(win)
+		juego.alPresionarQ()
+		juego.alPresionarEnter()
+		enemigosSimples = 1
+		enemigosDificiles = 1
+		kills = 0
+		}
+	}
 	method gameOver(){
 		game.clear()
 		game.addVisual(gameover)
@@ -93,6 +109,7 @@ object launch{
 	}
 	method contarKills(){
 		kills = kills + 1
+		testKills.cambiarImagen()
 	}
 }
 
@@ -106,7 +123,8 @@ object pantalla {
 		game.ground("mapavacio.png")
 		game.addVisual(inicio)
 		juego.alPresionarEnter()
-		juego.alPresionarQ()	
+		juego.alPresionarQ()
+			
 	}
 }
 
@@ -122,7 +140,10 @@ var property position = game.at(0, 0)
 	}
 
 }
-
+object win{
+	var property position = game.at(0, 0)
+	method image() = "logo.png"
+}
 object gameover {
 var property position = game.at(0, 0)
 	method image() = "Gameover.png"

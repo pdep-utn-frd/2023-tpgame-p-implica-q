@@ -271,6 +271,7 @@ object testKills inherits Imagen(imagen = "1.png", position = game.at(23,25)){
 		else if (launch.kills() == 3){
 			imagen = "3.png"
 		}
+		else imagen = "4.png"
 	}
 }
 
