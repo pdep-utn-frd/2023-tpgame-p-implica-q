@@ -164,8 +164,8 @@ class Bala inherits Imagen{
 	var property material= "bala"
 	
 	method borrarBala(){
-		game.removeTickEvent("bala")
 		game.removeVisual(self)
+		game.removeTickEvent("bala")
 	}
 	
 	override method position() = position

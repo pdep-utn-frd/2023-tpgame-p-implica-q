@@ -5,8 +5,8 @@ import personajes.*
 
 object launch{
 	var property position
-	var property enemigosSimples = 2
-	var property enemigosDificiles = 2
+	var property enemigosSimples = 1
+	var property enemigosDificiles = 1
 	var property kills = 0
 	
 //	const enemigo0 = new Enemigo(vida = 1,position = self.randomPos(), orientacion = arriba, imagen = "EnemigoArriba.png", categoria = 'enemigo')
