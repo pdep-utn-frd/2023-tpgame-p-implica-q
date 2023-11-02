@@ -1,0 +1,15 @@
+import wollok.game.*
+import visuales.*
+import BattleCity.*
+import direcciones.*
+import personajes.*
+
+program BattleCity{
+	pantalla.iniciar()
+	
+
+	
+	
+	// START
+	game.start()
+}
